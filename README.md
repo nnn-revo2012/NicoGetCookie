@@ -47,6 +47,7 @@ Released under the GNU Lesser GPL
 本ソフトウェアでは上記に更に追加修正を行ったものを使用しております。  
 https://github.com/nnn-revo2012/SnkLib.App.CookieGetter  
 Copyright (c) 2019 nnn-rev02012  
+Released under the GNU Lesser GPL  
 
 - Json.NET  
 https://www.newtonsoft.com/json  
