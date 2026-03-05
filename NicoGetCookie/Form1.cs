@@ -12,6 +12,7 @@ using System.Threading.Tasks;
 using System.Windows.Forms;
 
 using SunokoLibrary.Application;
+using SunokoLibrary.Windows.ViewModels;
 
 using NicoGetCookie.Prop;
 using NicoGetCookie.Net;
@@ -43,8 +44,11 @@ namespace NicoGetCookie
             //accountdbfile = Path.Combine(Props.GetSettingDirectory(), "account.db");
             //props = new Props();
             //props.LoadData(accountdbfile);
+
+            //コンボボックス初期化＆表示
             nicoSessionComboBox1.Selector.PropertyChanged += Selector_PropertyChanged;
             //var tsk = nicoSessionComboBox1.Selector.SetInfoAsync(Properties.Settings.Default.SelectedSourceInfo);
+            var tsk = nicoSessionComboBox1.Selector.SetInfoAsync(null);
 
             if (checkBox2.Checked)
             {
@@ -88,13 +92,6 @@ namespace NicoGetCookie
                     break;
             }
         }
-        //void btnReload_Click(object sender, EventArgs e)
-        //{ var tsk = nicoSessionComboBox1.Selector.UpdateAsync(); }
-        //void btnOpenCookieFileDialog_Click(object sender, EventArgs e)
-        //{ var tsk = nicoSessionComboBox1.ShowCookieDialogAsync(); }
-        //void checkBoxShowAll_CheckedChanged(object sender, EventArgs e)
-        //{ nicoSessionComboBox1.Selector.IsAllBrowserMode = checkBoxShowAll.Checked; }
-
 
         private void button1_Click(object sender, EventArgs e)
         {
@@ -105,18 +102,34 @@ namespace NicoGetCookie
         private async void button2_Click(object sender, EventArgs e)
         {
             //Cookieファイル直接指定
-            var tsk = nicoSessionComboBox1.ShowCookieDialogAsync();
+            await nicoSessionComboBox1.ShowCookieDialogAsync();
             var currentGetter = nicoSessionComboBox1.Selector.SelectedImporter;
             if (currentGetter != null)
             {
-                var result = await currentGetter.GetCookiesAsync(new Uri(Props.NicoDomain));
-                var cookie = result.Status == CookieImportState.Success ? result.Cookies["user_session"] : null;
-                //UI更新
                 textBox1.Text = currentGetter.SourceInfo.CookiePath;
-                textBox2.Text = cookie != null ? cookie.Value : null;
             }
         }
-
+ 
+        //指定されたcookieファイルを取得する
+        public async Task GetCookieFileAsync(string cookiefile)
+        {
+            var currentImporter = nicoSessionComboBox1.Selector.SelectedImporter;
+            var currentCookiePath = currentImporter.SourceInfo.CookiePath;
+            CookieSourceInfo newInfo = null;
+            if (!string.IsNullOrEmpty(cookiefile) &&
+                System.IO.File.Exists(cookiefile))
+            {
+                currentCookiePath = cookiefile;
+                newInfo = currentImporter.SourceInfo.GenerateCopy(cookiePath: currentCookiePath);
+            }
+            await nicoSessionComboBox1.Selector.SetInfoAsync(newInfo);
+        }
+        //指定されたcookieファイルを取得する
+        private async void textBox1_KeyDown(object sender, KeyEventArgs e)
+        {
+            if (!string.IsNullOrEmpty(textBox1.Text))
+                await GetCookieFileAsync(textBox1.Text);
+        }
         private async void button3_Click(object sender, EventArgs e)
         {
             //テスト
@@ -178,5 +191,6 @@ namespace NicoGetCookie
                 button2.Enabled = false;
             }
         }
+
     }
 }

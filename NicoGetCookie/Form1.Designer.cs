@@ -91,7 +91,6 @@ namespace NicoGetCookie
             // checkBox2
             // 
             this.checkBox2.AutoSize = true;
-            this.checkBox2.Enabled = false;
             this.checkBox2.Font = new System.Drawing.Font("MS UI Gothic", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(128)));
             this.checkBox2.Location = new System.Drawing.Point(9, 77);
             this.checkBox2.Name = "checkBox2";
@@ -132,6 +131,7 @@ namespace NicoGetCookie
             this.textBox1.Name = "textBox1";
             this.textBox1.Size = new System.Drawing.Size(330, 23);
             this.textBox1.TabIndex = 7;
+            this.textBox1.KeyDown += new System.Windows.Forms.KeyEventHandler(this.textBox1_KeyDown);
             // 
             // textBox2
             // 
