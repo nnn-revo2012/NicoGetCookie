@@ -1,7 +1,7 @@
 ﻿===============================================================================
 【タイトル】 NicoGetCookie
 【ファイル】 NicoGetCookie.exe
-【作成月日】 2026/02/23
+【作成月日】 2026/03/05
 【著 作 者】 nnn-revo2012
 【開発環境】 Microsoft Windows 11
              Microsoft Visual Studio 2019
@@ -93,5 +93,11 @@ https://www.sqlite.org/index.html
 Released into the Public Domain
 
 ■更新履歴
+2026/03/05　Version 0.0.1.02
+・起動時にブラウザーコンボボックスを初期化するよう修正
+・Cookieファイルを指定する機能（ダイアログ、テキスト入力）を追加
+・LICENCE、README.txtが別のソフトウェアのものだったので変更
+
 2026/02/23　Version 0.0.1.01
 リリース
+
