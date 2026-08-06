@@ -63,7 +63,7 @@ https://dotnet.microsoft.com/ja-jp/download/dotnet-framework/thank-you/net48-web
 ・NicoGetCookie
 https://github.com/nnn-revo2012/NicoGetCookie
 Copyright (c) 2026 nnn-revo2012
-Released under the 
+Released under the MIT License
 
 ・SnkLib.App.CookieGetter
 https://github.com/namoshika/SnkLib.App.CookieGetter

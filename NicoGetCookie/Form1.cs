@@ -166,9 +166,25 @@ namespace NicoGetCookie
             }
         }
 
+        private void ClearClipBorad()
+        {
+            if (Clipboard.ContainsText())
+            {
+                var clip_text = Clipboard.GetText();
+                if (clip_text.IndexOf("user_session_") > -1)
+                    Clipboard.Clear();
+            }
+        }
+
         private void 終了XToolStripMenuItem1_Click(object sender, EventArgs e)
         {
+            ClearClipBorad();
             this.Close();
+        }
+
+        private void Form1_FormClosing(object sender, FormClosingEventArgs e)
+        {
+            ClearClipBorad();
         }
 
         private void checkBox1_CheckedChanged(object sender, EventArgs e)

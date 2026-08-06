@@ -4,8 +4,8 @@ namespace NicoGetCookie.Prop
 {
     public class Ver
     {
-        public static readonly string Version = "0.0.1.02";
-        public static readonly string VerDate = "2026/03/05";
+        public static readonly string Version = "0.0.1.03";
+        public static readonly string VerDate = "2026/08/07";
 
         public static string GetFullVersion()
         {
