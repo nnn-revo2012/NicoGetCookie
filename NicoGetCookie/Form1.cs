@@ -68,7 +68,6 @@ namespace NicoGetCookie
             switch (e.PropertyName)
             {
                 case "SelectedIndex":
-                    var cookieContainer = new CookieContainer();
                     var currentGetter = nicoSessionComboBox1.Selector.SelectedImporter;
                     if (currentGetter != null)
                     {
@@ -208,5 +207,68 @@ namespace NicoGetCookie
             }
         }
 
+        private void button5_Click(object sender, EventArgs e)
+        {
+            CookieContainer _cc = new CookieContainer();
+            using (var form = new LoginNico(_cc, null, null))
+            {
+                var result = form.ShowDialog();
+                if (result == DialogResult.OK)
+                {
+                    MessageBox.Show("ニコニコにログインしました。",
+                                   "ログイン",
+                                   MessageBoxButtons.OK,
+                                   MessageBoxIcon.Information);
+                    textBox3.Text = _cc.GetCookies(new Uri(Props.NicoDomain))
+                        .Cast<Cookie>()
+                        .FirstOrDefault(ck => ck.Name == "user_session")?.Value ?? "";
+                }
+                else
+                {
+                    textBox3.Text = string.Empty;
+                    MessageBox.Show("ログインできませんでした。",
+                                   "ログイン",
+                                   MessageBoxButtons.OK,
+                                   MessageBoxIcon.Error);
+                }
+            }
+        }
+
+        private async void button6_Click(object sender, EventArgs e)
+        {
+            {
+                //テスト
+                if (!string.IsNullOrEmpty(textBox3.Text))
+                {
+                    var flag = false;
+                    var cc = new CookieContainer();
+                    var nln = new NicoLiveNet();
+                    cc = nln.SetCookie(textBox3.Text);
+                    (flag, _, _) = await nln.IsLoginNicoAsync(cc);
+                    if (flag)
+                    {
+                        MessageBox.Show("user_sessionは有効です",
+                                       "テスト",
+                                       MessageBoxButtons.OK,
+                                       MessageBoxIcon.Information);
+                    }
+                    else
+                    {
+                        MessageBox.Show("user_sessionは無効です",
+                                       "テスト",
+                                       MessageBoxButtons.OK,
+                                       MessageBoxIcon.Error);
+                    }
+                }
+            }
+        }
+        private void button7_Click(object sender, EventArgs e)
+        {
+            //コピー
+            if (!string.IsNullOrEmpty(textBox3.Text))
+            {
+                Clipboard.SetText(textBox3.Text);
+            }
+        }
     }
 }

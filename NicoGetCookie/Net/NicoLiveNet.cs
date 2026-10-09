@@ -272,11 +272,12 @@ namespace NicoGetCookie.Net
 
                 // Cookieをセット
                 foreach (Cookie ck in result.Cookies)
-                    if (ck.Name == "user_session" || ck.Name == "user_session_secure")
-                        cookies.Add(new Cookie(ck.Name, ck.Value, "/", ".nicovideo.jp"));
-                    else if (ck.Name == "age_auth")
-                        cookies.Add(ck);
-                IsLoginStatus = true;
+                {
+                    if (ck.Name == "user_session")
+                        IsLoginStatus = true;
+
+                    cookies.Add(ck);
+                }
 
                 if (IsDebug)
                 {
