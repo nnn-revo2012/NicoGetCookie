@@ -1,12 +1,12 @@
 # NicoGetCookie
 
-ブラウザーからニコニコ（ニコ動、ニコ生）のCookieを取得するプログラムです  
-
+本ツールでニコニコにログイン、またはFirefox系ブラウザーからニコニコ（ニコ動、ニコ生）のCookieを取得します  
 # 特徴
 
 - GUI(Windows Forms)使用。  
-- Firefox系のブラウザーのみ取得可能  
+- WebView2を利用してニコニコにログインしてニコニコのCookieを取得します  
 - Google Chrome、Microsoft Edge、OperaなどのChromium系ブラウザーからのCookie取得はできません  
+- Firefox系のブラウザーのみCookie取得可能  
 
 # 開発環境
 
@@ -17,7 +17,11 @@
 # パッケージ
 
 以下のパッケージをインストールしてください。  
-(ローカルのフォルダーにコピーして、そのフォルダーをVisual StudioでNugetのパッケージソースとして設定してください）  
+
+- Microsoft.Web.WebView2  
+- WebView2.Runtime.X64  
+
+(以下はローカルのフォルダーにコピーして、そのフォルダーをVisual StudioでNugetのパッケージソースとして設定してください）  
 
 - SnkLib.App.CookieGetter.2.4.4  
 - SnkLib.App.CookieGetter.Forms.1.4.5  
